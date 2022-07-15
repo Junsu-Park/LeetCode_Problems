@@ -7,16 +7,11 @@ class Solution:
                         'C' : 100,
                         'D' : 500,
                         'M' : 1000}
-        prev_1 = 0
-        prev_2 = 0
         ans = 0
-        for i in s:
-            print(i, ans)
-            ans += roman_dict[i]
-            if prev_1 != prev_2:
-                prev_1 = 0
-            if prev_2 < roman_dict[i]:
-                ans = ans - prev_1 * 2 - prev_2 * 2
-            prev_1 = prev_2
-            prev_2 = roman_dict[i]
-        return ans
+        for i, r in enumerate(s[:-1]):
+            if roman_dict[s[i+1]] > roman_dict[r]:
+                ans -= roman_dict[r]
+            else:
+                ans += roman_dict[r]
+        
+        return ans + roman_dict[s[-1]]
