@@ -9,6 +9,6 @@ class Solution:
         for i in range(2, max_iter):
             if not primes[i]:continue
             j = i
-            for j in range(2, n//i + 1):
+            for j in range(i, n//i + 1):
                 primes[i*j] = 0
         return sum(primes)
