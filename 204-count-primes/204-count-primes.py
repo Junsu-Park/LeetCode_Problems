@@ -1,14 +1,14 @@
 class Solution:
-    def countPrimes(self, n: int) -> int:
-        if n == 0 or n==1:
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n < 2:
             return 0
-        
-        primes = [1 for _ in range(n+1)]
-        primes[0], primes[1], primes[-1] = 0, 0, 0
-        max_iter=int(n**0.5) + 1
-        for i in range(2, max_iter):
-            if not primes[i]:continue
-            j = i
-            for j in range(i, n//i + 1):
-                primes[i*j] = 0
-        return sum(primes)
+        s = [1] * n
+        s[0] = s[1] = 0
+        for i in range(2, int(n ** 0.5) + 1):
+            if s[i] == 1:
+                s[i * i:n:i] = [0] * len(s[i * i:n:i])
+        return sum(s)
